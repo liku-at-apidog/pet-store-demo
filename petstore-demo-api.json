@@ -1,0 +1,2795 @@
+{
+  "openapi": "3.0.1",
+  "info": {
+    "title": "Default module",
+    "description": "This is a sample server Petstore server.  You can find out more about Swagger at [http://swagger.io](http://swagger.io) or on [irc.freenode.net, #swagger](http://swagger.io/irc/).  For this sample, you can use the api key `special-key` to test the authorization filters.",
+    "version": "1.0.7",
+    "termsOfService": "http://swagger.io/terms/",
+    "contact": {
+      "email": "apiteam@swagger.io"
+    },
+    "license": {
+      "name": "Apache 2.0",
+      "url": "http://www.apache.org/licenses/LICENSE-2.0.html"
+    }
+  },
+  "tags": [
+    {
+      "name": "user"
+    },
+    {
+      "name": "pet"
+    },
+    {
+      "name": "store"
+    },
+    {
+      "name": "Internal"
+    }
+  ],
+  "paths": {
+    "/users/register": {
+      "post": {
+        "summary": "Register New Users",
+        "deprecated": false,
+        "description": "Registers new users in to the system and record their information.",
+        "tags": [],
+        "parameters": [
+          {
+            "name": "name",
+            "in": "query",
+            "description": "",
+            "required": false,
+            "example": "Tim",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "age",
+            "in": "query",
+            "description": "",
+            "required": false,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {}
+              },
+              "examples": {}
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "status"
+                  ]
+                }
+              }
+            }
+          }
+        },
+        "security": []
+      }
+    },
+    "/user/createWithArray": {
+      "post": {
+        "summary": "Creates list of users with given input array",
+        "deprecated": false,
+        "description": "",
+        "operationId": "createUsersWithArrayInput",
+        "tags": [
+          "user"
+        ],
+        "parameters": [],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UserArray"
+              },
+              "example": ""
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {}
+                }
+              }
+            },
+            "headers": {}
+          }
+        },
+        "security": []
+      }
+    },
+    "/user/createWithList": {
+      "post": {
+        "summary": "Creates list of users with given input array",
+        "deprecated": false,
+        "description": "",
+        "operationId": "createUsersWithListInput",
+        "tags": [
+          "user"
+        ],
+        "parameters": [],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UserArray"
+              },
+              "example": ""
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {}
+                }
+              }
+            },
+            "headers": {}
+          }
+        },
+        "security": []
+      }
+    },
+    "/user/{username}": {
+      "get": {
+        "summary": "Get user by user name",
+        "deprecated": false,
+        "description": "",
+        "operationId": "getUserByName",
+        "tags": [
+          "user"
+        ],
+        "parameters": [
+          {
+            "name": "username",
+            "in": "path",
+            "description": "The name that needs to be fetched. Use user1 for testing. ",
+            "required": true,
+            "example": "",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/User%20Details"
+                },
+                "example": {
+                  "id": 22065313,
+                  "username": "Marguerite Lesch",
+                  "firstName": "Bettye",
+                  "lastName": "Labadie-Abshire",
+                  "email": "Monique.Jast@yahoo.com",
+                  "password": "xvr9knVLOlyxrmB",
+                  "phone": "(409) 470-5944",
+                  "userStatus": -19289272
+                }
+              }
+            },
+            "headers": {}
+          },
+          "400": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {}
+                }
+              }
+            },
+            "headers": {}
+          },
+          "404": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {}
+                }
+              }
+            },
+            "headers": {}
+          }
+        },
+        "security": []
+      },
+      "put": {
+        "summary": "Updated user",
+        "deprecated": false,
+        "description": "This can only be done by the logged in user.",
+        "operationId": "updateUser",
+        "tags": [
+          "user"
+        ],
+        "parameters": [
+          {
+            "name": "username",
+            "in": "path",
+            "description": "name that need to be updated",
+            "required": true,
+            "example": "",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/User%20Details"
+              },
+              "example": ""
+            }
+          }
+        },
+        "responses": {
+          "400": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {}
+                }
+              }
+            },
+            "headers": {}
+          },
+          "404": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {}
+                }
+              }
+            },
+            "headers": {}
+          }
+        },
+        "security": []
+      },
+      "delete": {
+        "summary": "Delete user",
+        "deprecated": false,
+        "description": "This can only be done by the logged in user.",
+        "operationId": "deleteUser",
+        "tags": [
+          "user"
+        ],
+        "parameters": [
+          {
+            "name": "username",
+            "in": "path",
+            "description": "The name that needs to be deleted",
+            "required": true,
+            "example": "",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "400": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {}
+                }
+              }
+            },
+            "headers": {}
+          },
+          "404": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {}
+                }
+              }
+            },
+            "headers": {}
+          }
+        },
+        "security": []
+      }
+    },
+    "/user/login": {
+      "get": {
+        "summary": "Logs user into the system",
+        "deprecated": false,
+        "description": "",
+        "operationId": "loginUser",
+        "tags": [
+          "user"
+        ],
+        "parameters": [
+          {
+            "name": "username",
+            "in": "query",
+            "description": "The user name for login",
+            "required": true,
+            "example": "John Doe",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "password",
+            "in": "query",
+            "description": "The password for login in clear text",
+            "required": true,
+            "example": "Abcd12345",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "type": "object",
+                      "properties": {
+                        "id": {
+                          "type": "integer",
+                          "format": "int64",
+                          "minimum": 1,
+                          "maximum": 99
+                        },
+                        "email": {
+                          "type": "string"
+                        },
+                        "phone": {
+                          "type": "string"
+                        },
+                        "age": {
+                          "type": "integer",
+                          "minimum": 18,
+                          "maximum": 75
+                        },
+                        "userStatus": {
+                          "type": "string",
+                          "description": "User Status",
+                          "enum": [
+                            "Basic",
+                            "VIP"
+                          ]
+                        }
+                      },
+                      "required": [
+                        "age"
+                      ]
+                    }
+                  },
+                  "required": [
+                    "data"
+                  ]
+                },
+                "example": {
+                  "data": {
+                    "id": 26,
+                    "email": "Cynthia_Gutkowski58@gmail.com",
+                    "phone": "1-388-216-5366",
+                    "age": 47,
+                    "userStatus": "Basic"
+                  }
+                }
+              }
+            },
+            "headers": {}
+          },
+          "400": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {}
+                }
+              }
+            },
+            "headers": {}
+          }
+        },
+        "security": []
+      }
+    },
+    "/user/logout": {
+      "get": {
+        "summary": "Logs out current logged in user session",
+        "deprecated": false,
+        "description": "",
+        "operationId": "logoutUser",
+        "tags": [
+          "user"
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {}
+                }
+              }
+            },
+            "headers": {}
+          }
+        },
+        "security": []
+      }
+    },
+    "/user": {
+      "post": {
+        "summary": "Create user",
+        "deprecated": false,
+        "description": "This can only be done by the logged in user.",
+        "operationId": "createUser",
+        "tags": [
+          "user"
+        ],
+        "parameters": [],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/User%20Details"
+              },
+              "example": ""
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {}
+                }
+              }
+            },
+            "headers": {}
+          }
+        },
+        "security": []
+      }
+    },
+    "/pet/{petId}/uploadImage": {
+      "post": {
+        "summary": "uploads an image",
+        "deprecated": false,
+        "description": "",
+        "operationId": "uploadFile",
+        "tags": [
+          "pet"
+        ],
+        "parameters": [
+          {
+            "name": "petId",
+            "in": "path",
+            "description": "ID of pet to update",
+            "required": true,
+            "example": 0,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "additionalMetadata": {
+                    "description": "Additional data to pass to server",
+                    "type": "string",
+                    "example": ""
+                  },
+                  "file": {
+                    "description": "file to upload",
+                    "type": "string",
+                    "format": "binary",
+                    "example": ""
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiResponse"
+                }
+              }
+            },
+            "headers": {}
+          }
+        },
+        "security": []
+      }
+    },
+    "/pet0": {
+      "post": {
+        "summary": "Add a new pet to the store",
+        "deprecated": false,
+        "description": "",
+        "operationId": "addPet",
+        "tags": [
+          "pet"
+        ],
+        "parameters": [],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Pet"
+              },
+              "example": ""
+            }
+          }
+        },
+        "responses": {
+          "405": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {}
+                }
+              }
+            },
+            "headers": {}
+          }
+        },
+        "security": []
+      },
+      "put": {
+        "summary": "Update an existing pet",
+        "deprecated": false,
+        "description": "",
+        "operationId": "updatePet",
+        "tags": [
+          "pet"
+        ],
+        "parameters": [],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Pet"
+              },
+              "example": ""
+            }
+          }
+        },
+        "responses": {
+          "400": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {}
+                }
+              }
+            },
+            "headers": {}
+          },
+          "404": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {}
+                }
+              }
+            },
+            "headers": {}
+          },
+          "405": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {}
+                }
+              }
+            },
+            "headers": {}
+          }
+        },
+        "security": []
+      }
+    },
+    "/pet/findByTags": {
+      "get": {
+        "summary": "Finds Pets by tags",
+        "deprecated": true,
+        "description": "Multiple tags can be provided with comma separated strings. Use tag1, tag2, tag3 for testing.",
+        "operationId": "findPetsByTags",
+        "tags": [
+          "pet"
+        ],
+        "parameters": [
+          {
+            "name": "tags",
+            "in": "query",
+            "description": "Tags to filter by",
+            "required": true,
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Pet"
+                  }
+                }
+              }
+            },
+            "headers": {}
+          },
+          "400": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {}
+                }
+              }
+            },
+            "headers": {}
+          }
+        },
+        "security": []
+      }
+    },
+    "/pet/{petId}0": {
+      "get": {
+        "summary": "Find pet by ID",
+        "deprecated": false,
+        "description": "Returns a single pet",
+        "operationId": "getPetById",
+        "tags": [
+          "pet"
+        ],
+        "parameters": [
+          {
+            "name": "petId",
+            "in": "path",
+            "description": "ID of pet to return",
+            "required": true,
+            "example": 0,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Pet"
+                }
+              }
+            },
+            "headers": {}
+          },
+          "400": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {}
+                }
+              }
+            },
+            "headers": {}
+          },
+          "404": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {}
+                }
+              }
+            },
+            "headers": {}
+          }
+        },
+        "security": []
+      }
+    },
+    "/pet/findByStatus": {
+      "get": {
+        "summary": "Finds Pets by status",
+        "deprecated": false,
+        "description": "Multiple status values can be provided with comma separated strings",
+        "operationId": "findPetsByStatus",
+        "tags": [
+          "pet"
+        ],
+        "parameters": [
+          {
+            "name": "status",
+            "in": "query",
+            "description": "Status values that need to be considered for filter",
+            "required": true,
+            "example": "available",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "id",
+            "in": "query",
+            "description": "ID",
+            "required": false,
+            "example": 0,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Pet"
+                  }
+                },
+                "example": [
+                  {
+                    "id": 25879807,
+                    "category": {
+                      "id": -39808612,
+                      "name": "laudantium quidem animi"
+                    },
+                    "name": "doggie",
+                    "photoUrls": [
+                      "https://loremflickr.com/640/480/technics"
+                    ],
+                    "tags": [
+                      {
+                        "id": -12561660,
+                        "name": "quos consectetur accusantium"
+                      }
+                    ],
+                    "status": "available"
+                  }
+                ]
+              }
+            },
+            "headers": {}
+          },
+          "400": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {}
+                }
+              }
+            },
+            "headers": {}
+          }
+        },
+        "security": []
+      }
+    },
+    "/pet/{petId}": {
+      "post": {
+        "summary": "Updates a pet in the store with form data",
+        "deprecated": false,
+        "description": "",
+        "operationId": "updatePetWithForm",
+        "tags": [
+          "pet"
+        ],
+        "parameters": [
+          {
+            "name": "petId",
+            "in": "path",
+            "description": "ID of pet that needs to be updated",
+            "required": true,
+            "example": 0,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/x-www-form-urlencoded": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "description": "Updated name of the pet",
+                    "type": "string",
+                    "example": ""
+                  },
+                  "status": {
+                    "description": "Updated status of the pet",
+                    "type": "string",
+                    "example": ""
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "405": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {}
+                }
+              }
+            },
+            "headers": {}
+          }
+        },
+        "security": []
+      },
+      "delete": {
+        "summary": "Deletes a pet",
+        "deprecated": false,
+        "description": "",
+        "tags": [
+          "pet"
+        ],
+        "parameters": [
+          {
+            "name": "petId",
+            "in": "path",
+            "description": "Pet id to delete",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "api_key",
+            "in": "header",
+            "description": "",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "code": {
+                      "type": "integer",
+                      "minimum": 0,
+                      "maximum": 0
+                    }
+                  },
+                  "required": [
+                    "code"
+                  ]
+                },
+                "example": {
+                  "code": 0
+                }
+              }
+            },
+            "headers": {}
+          }
+        },
+        "security": [
+          {
+            "oauth21": []
+          }
+        ]
+      },
+      "get": {
+        "summary": "Find pet by ID",
+        "deprecated": false,
+        "description": "",
+        "tags": [
+          "pet"
+        ],
+        "parameters": [
+          {
+            "name": "petId",
+            "in": "path",
+            "description": "",
+            "required": true,
+            "example": "abc",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "code": {
+                      "type": "integer",
+                      "minimum": 0,
+                      "maximum": 0,
+                      "description": "status code"
+                    },
+                    "data": {
+                      "$ref": "#/components/schemas/Pet",
+                      "description": "pet details"
+                    }
+                  },
+                  "required": [
+                    "code",
+                    "data"
+                  ]
+                },
+                "example": {
+                  "code": null,
+                  "data": {
+                    "id": 13798338,
+                    "category": {
+                      "id": -34963357,
+                      "name": "Max Schmeler PhD"
+                    },
+                    "name": "doggie",
+                    "photoUrls": [
+                      "https://loremflickr.com/400/400?lock=1302345019495231"
+                    ],
+                    "tags": [
+                      {
+                        "id": 16111869,
+                        "name": "Irene Koepp"
+                      },
+                      {
+                        "id": 28668812,
+                        "name": "Iris Bogisich"
+                      },
+                      {
+                        "id": -36515504,
+                        "name": "Patricia Dibbert"
+                      }
+                    ],
+                    "status": "sold"
+                  }
+                }
+              }
+            },
+            "headers": {}
+          },
+          "400": {
+            "$ref": "#/components/responses/Invalid input",
+            "description": ""
+          },
+          "404": {
+            "$ref": "#/components/responses/Record not found",
+            "description": ""
+          }
+        },
+        "security": [
+          {
+            "oauth21": []
+          }
+        ]
+      }
+    },
+    "/store/order/{orderId}": {
+      "get": {
+        "summary": "Find purchase order by ID",
+        "deprecated": false,
+        "description": "For valid response try integer IDs with value >= 1 and <= 10. Other values will generated exceptions",
+        "operationId": "getOrderById",
+        "tags": [
+          "store"
+        ],
+        "parameters": [
+          {
+            "name": "orderId",
+            "in": "path",
+            "description": "ID of pet that needs to be fetched",
+            "required": true,
+            "example": 0,
+            "schema": {
+              "type": "integer",
+              "format": "int64",
+              "minimum": 1,
+              "maximum": 10
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Order"
+                }
+              }
+            },
+            "headers": {}
+          },
+          "400": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {}
+                }
+              }
+            },
+            "headers": {}
+          },
+          "404": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {}
+                }
+              }
+            },
+            "headers": {}
+          }
+        },
+        "security": []
+      },
+      "delete": {
+        "summary": "Delete purchase order by ID",
+        "deprecated": false,
+        "description": "For valid response try integer IDs with positive integer value. Negative or non-integer values will generate API errors",
+        "operationId": "deleteOrder",
+        "tags": [
+          "store"
+        ],
+        "parameters": [
+          {
+            "name": "orderId",
+            "in": "path",
+            "description": "ID of the order that needs to be deleted",
+            "required": true,
+            "example": 0,
+            "schema": {
+              "type": "integer",
+              "format": "int64",
+              "minimum": 1
+            }
+          }
+        ],
+        "responses": {
+          "400": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {}
+                }
+              }
+            },
+            "headers": {}
+          },
+          "404": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {}
+                }
+              }
+            },
+            "headers": {}
+          }
+        },
+        "security": []
+      }
+    },
+    "/store/order": {
+      "post": {
+        "summary": "Place an order for a pet",
+        "deprecated": false,
+        "description": "",
+        "operationId": "placeOrder",
+        "tags": [
+          "store"
+        ],
+        "parameters": [],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {}
+              },
+              "example": ""
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Order"
+                }
+              }
+            },
+            "headers": {}
+          },
+          "400": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {}
+                }
+              }
+            },
+            "headers": {}
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
+      }
+    },
+    "/store/inventory": {
+      "get": {
+        "summary": "Returns pet inventories by status",
+        "deprecated": false,
+        "description": "Returns a map of status codes to quantities",
+        "operationId": "getInventory",
+        "tags": [
+          "store"
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": {
+                    "type": "integer",
+                    "format": "int32"
+                  },
+                  "properties": {}
+                }
+              }
+            },
+            "headers": {}
+          }
+        },
+        "security": []
+      }
+    },
+    "/pet": {
+      "post": {
+        "summary": "Add a new pet to the store",
+        "deprecated": false,
+        "description": "",
+        "tags": [
+          "pet"
+        ],
+        "parameters": [],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "code": {
+                    "type": "integer"
+                  },
+                  "data": {
+                    "type": "object",
+                    "properties": {
+                      "name": {
+                        "type": "string"
+                      },
+                      "photoUrls": {
+                        "type": "array",
+                        "items": {
+                          "type": "string"
+                        }
+                      },
+                      "id": {
+                        "type": "integer"
+                      },
+                      "category": {
+                        "type": "object",
+                        "properties": {
+                          "id": {
+                            "type": "integer"
+                          },
+                          "name": {
+                            "type": "string"
+                          }
+                        },
+                        "required": [
+                          "id",
+                          "name"
+                        ]
+                      },
+                      "tags": {
+                        "type": "array",
+                        "items": {
+                          "type": "object",
+                          "properties": {
+                            "id": {
+                              "type": "integer"
+                            },
+                            "name": {
+                              "type": "string"
+                            }
+                          }
+                        }
+                      },
+                      "status": {
+                        "type": "string"
+                      }
+                    },
+                    "required": [
+                      "name",
+                      "photoUrls",
+                      "id",
+                      "category",
+                      "tags",
+                      "status"
+                    ]
+                  }
+                },
+                "required": [
+                  "code",
+                  "data"
+                ]
+              },
+              "examples": {}
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "code": {
+                      "type": "integer",
+                      "minimum": 0,
+                      "maximum": 0
+                    },
+                    "data": {
+                      "$ref": "#/components/schemas/Pet"
+                    }
+                  },
+                  "required": [
+                    "code",
+                    "data"
+                  ]
+                },
+                "example": {
+                  "code": 0,
+                  "data": {
+                    "name": "Hello Kitty",
+                    "photoUrls": [
+                      "http://dummyimage.com/400x400"
+                    ],
+                    "id": 3,
+                    "category": {
+                      "id": 71,
+                      "name": "Cat"
+                    },
+                    "tags": [
+                      {
+                        "id": 22,
+                        "name": "Cat"
+                      }
+                    ],
+                    "status": "sold"
+                  }
+                }
+              }
+            },
+            "headers": {}
+          }
+        },
+        "security": [
+          {
+            "oauth21": []
+          }
+        ]
+      },
+      "put": {
+        "summary": "Update an existing pet",
+        "deprecated": false,
+        "description": "",
+        "tags": [
+          "pet"
+        ],
+        "parameters": [],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "title": "",
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "string",
+                    "description": "ID"
+                  },
+                  "name": {
+                    "type": "string",
+                    "description": "name"
+                  },
+                  "category": {
+                    "type": "string",
+                    "description": "group"
+                  }
+                },
+                "required": [
+                  "id",
+                  "name",
+                  "category"
+                ]
+              },
+              "examples": {}
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "code": {
+                      "type": "integer"
+                    },
+                    "data": {
+                      "$ref": "#/components/schemas/Pet"
+                    }
+                  },
+                  "required": [
+                    "code",
+                    "data"
+                  ]
+                },
+                "example": {
+                  "code": 0,
+                  "data": {
+                    "name": "Hello Kitty",
+                    "photoUrls": [
+                      "http://dummyimage.com/400x400"
+                    ],
+                    "id": 3,
+                    "category": {
+                      "id": 71,
+                      "name": "Cat"
+                    },
+                    "tags": [
+                      {
+                        "id": 22,
+                        "name": "Cat"
+                      }
+                    ],
+                    "status": "sold"
+                  }
+                }
+              }
+            },
+            "headers": {}
+          },
+          "404": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {}
+                }
+              }
+            },
+            "headers": {}
+          },
+          "405": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {}
+                }
+              }
+            },
+            "headers": {}
+          }
+        },
+        "security": [
+          {
+            "oauth21": []
+          }
+        ]
+      }
+    },
+    "/pet/findbyStatus": {
+      "get": {
+        "summary": "Finds Pets by status",
+        "deprecated": false,
+        "description": "",
+        "tags": [
+          "Internal"
+        ],
+        "parameters": [
+          {
+            "name": "status",
+            "in": "query",
+            "description": "Status values that need to be considered for filter",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Pet"
+                  }
+                },
+                "example": {
+                  "code": 0,
+                  "data": [
+                    {
+                      "name": "Hello Kitty",
+                      "photoUrls": [
+                        "http://dummyimage.com/400x400"
+                      ],
+                      "id": 3,
+                      "category": {
+                        "id": 71,
+                        "name": "Cat"
+                      },
+                      "tags": [
+                        {
+                          "id": 22,
+                          "name": "Cat"
+                        }
+                      ],
+                      "status": "sold"
+                    },
+                    {
+                      "name": "White Dog",
+                      "photoUrls": [
+                        "http://dummyimage.com/400x400"
+                      ],
+                      "id": 3,
+                      "category": {
+                        "id": 71,
+                        "name": "Dog"
+                      },
+                      "tags": [
+                        {
+                          "id": 22,
+                          "name": "Dog"
+                        }
+                      ],
+                      "status": "sold"
+                    }
+                  ]
+                }
+              }
+            },
+            "headers": {}
+          },
+          "400": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "code": {
+                      "type": "integer"
+                    }
+                  },
+                  "required": [
+                    "code"
+                  ]
+                }
+              }
+            },
+            "headers": {}
+          }
+        },
+        "security": [
+          {
+            "oauth21": []
+          }
+        ]
+      }
+    },
+    "/v2/store/inventory": {
+      "get": {
+        "summary": "Get Inventory",
+        "deprecated": false,
+        "description": "",
+        "tags": [],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "sold": {
+                      "type": "integer"
+                    },
+                    "d": {
+                      "type": "integer"
+                    },
+                    "string": {
+                      "type": "integer"
+                    },
+                    "test": {
+                      "type": "integer"
+                    },
+                    "Busy": {
+                      "type": "integer"
+                    },
+                    "pending": {
+                      "type": "integer"
+                    },
+                    "available": {
+                      "type": "integer"
+                    },
+                    "weisskeiner1": {
+                      "type": "integer"
+                    },
+                    "avalible": {
+                      "type": "integer"
+                    },
+                    "active": {
+                      "type": "integer"
+                    },
+                    "Not Available": {
+                      "type": "integer"
+                    },
+                    "example value": {
+                      "type": "integer"
+                    },
+                    "availabl": {
+                      "type": "integer"
+                    },
+                    "SOLD": {
+                      "type": "integer"
+                    },
+                    "avaliable": {
+                      "type": "integer"
+                    },
+                    "available ": {
+                      "type": "integer"
+                    },
+                    "invalid": {
+                      "type": "integer"
+                    },
+                    "Available": {
+                      "type": "integer"
+                    },
+                    "verfuegbar": {
+                      "type": "integer"
+                    },
+                    "PRODALI": {
+                      "type": "integer"
+                    },
+                    "test@falha": {
+                      "type": "integer"
+                    }
+                  },
+                  "required": [
+                    "sold",
+                    "d",
+                    "string",
+                    "test",
+                    "Busy",
+                    "pending",
+                    "available",
+                    "weisskeiner1",
+                    "avalible",
+                    "active",
+                    "Not Available",
+                    "example value",
+                    "availabl",
+                    "SOLD",
+                    "avaliable",
+                    "available ",
+                    "invalid",
+                    "Available",
+                    "verfuegbar",
+                    "PRODALI",
+                    "test@falha"
+                  ]
+                },
+                "example": {
+                  "sold": 123,
+                  "d": 1,
+                  "string": 255,
+                  "test": 1,
+                  "Busy": 1,
+                  "pending": 120,
+                  "available": 464,
+                  "weisskeiner1": 1,
+                  "avalible": 1,
+                  "active": 6,
+                  "Not Available": 1,
+                  "example value": 1,
+                  "availabl": 1,
+                  "SOLD": 1,
+                  "avaliable": 1,
+                  "available ": 1,
+                  "invalid": 3,
+                  "Available": 1,
+                  "verfuegbar": 2,
+                  "PRODALI": 1,
+                  "test@falha": 1
+                }
+              }
+            }
+          }
+        },
+        "security": []
+      }
+    },
+    "/v1/pets": {
+      "get": {
+        "summary": "Get Pets",
+        "deprecated": false,
+        "description": "",
+        "tags": [],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "id": {
+                            "type": "string"
+                          },
+                          "name": {
+                            "type": "string"
+                          },
+                          "species": {
+                            "type": "string"
+                          },
+                          "breed": {
+                            "type": "string"
+                          },
+                          "ageMonths": {
+                            "type": "integer"
+                          },
+                          "size": {
+                            "type": "string"
+                          },
+                          "status": {
+                            "type": "string"
+                          },
+                          "price": {
+                            "type": "string"
+                          },
+                          "currency": {
+                            "type": "string"
+                          },
+                          "goodWithKids": {
+                            "type": "boolean"
+                          },
+                          "tenantId": {
+                            "type": "string"
+                          },
+                          "createdAt": {
+                            "type": "string"
+                          },
+                          "updatedAt": {
+                            "type": "string"
+                          },
+                          "medicalInfo": {
+                            "type": "object",
+                            "properties": {
+                              "vaccinated": {
+                                "type": "boolean"
+                              },
+                              "spayedNeutered": {
+                                "type": "boolean"
+                              },
+                              "microchipped": {
+                                "type": "boolean"
+                              },
+                              "specialNeeds": {
+                                "type": "boolean"
+                              },
+                              "healthNotes": {
+                                "type": "string"
+                              }
+                            },
+                            "required": [
+                              "vaccinated",
+                              "spayedNeutered",
+                              "microchipped",
+                              "specialNeeds",
+                              "healthNotes"
+                            ]
+                          }
+                        },
+                        "required": [
+                          "id",
+                          "name",
+                          "species",
+                          "breed",
+                          "ageMonths",
+                          "size",
+                          "status",
+                          "price",
+                          "currency",
+                          "goodWithKids",
+                          "tenantId",
+                          "createdAt",
+                          "updatedAt",
+                          "medicalInfo"
+                        ]
+                      }
+                    },
+                    "pagination": {
+                      "type": "object",
+                      "properties": {
+                        "page": {
+                          "type": "integer"
+                        },
+                        "limit": {
+                          "type": "integer"
+                        },
+                        "totalItems": {
+                          "type": "integer"
+                        },
+                        "totalPages": {
+                          "type": "integer"
+                        }
+                      },
+                      "required": [
+                        "page",
+                        "limit",
+                        "totalItems",
+                        "totalPages"
+                      ]
+                    }
+                  },
+                  "required": [
+                    "data",
+                    "pagination"
+                  ]
+                },
+                "example": {
+                  "data": [
+                    {
+                      "id": "019b7221-e3d3-75ca-9046-a929e03b49db",
+                      "name": "Max",
+                      "species": "OTHER",
+                      "breed": "Domestic Shorthair",
+                      "ageMonths": 18,
+                      "size": "SMALL",
+                      "status": "AVAILABLE",
+                      "price": "50.00",
+                      "currency": "GBP",
+                      "goodWithKids": true,
+                      "tenantId": "550e8400-e29b-41d4-a716-446655440000",
+                      "createdAt": "2025-12-31T01:59:42.312105Z",
+                      "updatedAt": "2025-12-31T01:59:42.312105Z",
+                      "medicalInfo": {
+                        "vaccinated": false,
+                        "spayedNeutered": false,
+                        "microchipped": true,
+                        "specialNeeds": true,
+                        "healthNotes": "sint consequat commodo ut"
+                      }
+                    },
+                    {
+                      "id": "019b7224-55b1-70d9-932a-12d5c0e8b59e",
+                      "name": "Max",
+                      "species": "OTHER",
+                      "breed": "Domestic Shorthair",
+                      "ageMonths": 18,
+                      "size": "SMALL",
+                      "status": "AVAILABLE",
+                      "price": "50.00",
+                      "currency": "GBP",
+                      "goodWithKids": true,
+                      "tenantId": "550e8400-e29b-41d4-a716-446655440000",
+                      "createdAt": "2025-12-31T02:02:22.527189Z",
+                      "updatedAt": "2025-12-31T02:02:22.527189Z",
+                      "medicalInfo": {
+                        "vaccinated": false,
+                        "spayedNeutered": false,
+                        "microchipped": true,
+                        "specialNeeds": true,
+                        "healthNotes": "sint consequat commodo ut"
+                      }
+                    },
+                    {
+                      "id": "019bb615-7755-7389-b5fc-9165193e1146",
+                      "name": "Max",
+                      "species": "DOG",
+                      "breed": "Golden Retriever",
+                      "ageMonths": 24,
+                      "size": "LARGE",
+                      "status": "AVAILABLE",
+                      "price": "250.00",
+                      "currency": "USD",
+                      "goodWithKids": true,
+                      "createdAt": "2026-01-13T06:40:18.787932Z",
+                      "updatedAt": "2026-01-13T06:40:18.787932Z",
+                      "medicalInfo": {
+                        "vaccinated": true,
+                        "spayedNeutered": true,
+                        "microchipped": true,
+                        "specialNeeds": false,
+                        "healthNotes": "Up to date on all vaccinations"
+                      }
+                    },
+                    {
+                      "id": "019bb6f1-8357-732c-9a4b-b00199a3eeac",
+                      "name": "MedicalPet",
+                      "species": "DOG",
+                      "ageMonths": 30,
+                      "size": "MEDIUM",
+                      "status": "AVAILABLE",
+                      "price": "180.00",
+                      "currency": "USD",
+                      "goodWithKids": false,
+                      "createdAt": "2026-01-13T10:40:39.779821Z",
+                      "updatedAt": "2026-01-13T10:40:39.779821Z",
+                      "medicalInfo": {
+                        "vaccinated": true,
+                        "spayedNeutered": false,
+                        "microchipped": true,
+                        "specialNeeds": true,
+                        "healthNotes": "Requires allergy-friendly diet"
+                      }
+                    },
+                    {
+                      "id": "019bb6f1-85b2-769f-add7-17f64ba171d1",
+                      "name": "PhotoPet",
+                      "species": "CAT",
+                      "breed": "Domestic Shorthair",
+                      "ageMonths": 14,
+                      "size": "SMALL",
+                      "status": "AVAILABLE",
+                      "price": "90.00",
+                      "currency": "USD",
+                      "goodWithKids": true,
+                      "createdAt": "2026-01-13T10:40:40.371728Z",
+                      "updatedAt": "2026-01-13T10:40:40.371728Z",
+                      "medicalInfo": {
+                        "vaccinated": true,
+                        "spayedNeutered": true,
+                        "microchipped": false,
+                        "specialNeeds": false,
+                        "healthNotes": "Healthy and up to date on core vaccines."
+                      }
+                    },
+                    {
+                      "id": "019bb6f1-86db-751e-b3ff-f1cc1b2d6eea",
+                      "name": "LowFeePet",
+                      "species": "OTHER",
+                      "breed": "Mixed Breed",
+                      "ageMonths": 3,
+                      "size": "SMALL",
+                      "status": "AVAILABLE",
+                      "price": "0.00",
+                      "currency": "USD",
+                      "goodWithKids": true,
+                      "createdAt": "2026-01-13T10:40:40.668154Z",
+                      "updatedAt": "2026-01-13T10:40:40.668154Z",
+                      "medicalInfo": {
+                        "vaccinated": true,
+                        "spayedNeutered": false,
+                        "microchipped": false,
+                        "specialNeeds": false,
+                        "healthNotes": "Healthy and active; initial vaccinations completed."
+                      }
+                    },
+                    {
+                      "id": "019bb6f1-87f9-762b-8005-a6de5fefa636",
+                      "name": "EuroPet",
+                      "species": "DOG",
+                      "breed": "German Shepherd",
+                      "ageMonths": 20,
+                      "size": "LARGE",
+                      "status": "AVAILABLE",
+                      "price": "200.00",
+                      "currency": "EUR",
+                      "goodWithKids": true,
+                      "createdAt": "2026-01-13T10:40:40.954142Z",
+                      "updatedAt": "2026-01-13T10:40:40.954142Z",
+                      "medicalInfo": {
+                        "vaccinated": true,
+                        "spayedNeutered": true,
+                        "microchipped": true,
+                        "specialNeeds": false,
+                        "healthNotes": "Vaccinations current; routine wellness check completed last month."
+                      }
+                    },
+                    {
+                      "id": "019bb6f1-9a69-7478-9c66-a85dd950cd40",
+                      "name": "StatusCase",
+                      "species": "CAT",
+                      "breed": "Domestic Shorthair",
+                      "ageMonths": 10,
+                      "size": "SMALL",
+                      "status": "AVAILABLE",
+                      "price": "80.00",
+                      "currency": "USD",
+                      "goodWithKids": true,
+                      "createdAt": "2026-01-13T10:40:45.67439Z",
+                      "updatedAt": "2026-01-13T10:40:45.67439Z",
+                      "medicalInfo": {
+                        "vaccinated": true,
+                        "spayedNeutered": true,
+                        "microchipped": false,
+                        "specialNeeds": false,
+                        "healthNotes": "Healthy indoor cat; routine vaccines completed."
+                      }
+                    },
+                    {
+                      "id": "019bb6f1-9b97-732d-945a-b14308e32824",
+                      "name": "StatusCase",
+                      "species": "CAT",
+                      "breed": "Domestic Shorthair",
+                      "ageMonths": 10,
+                      "size": "SMALL",
+                      "status": "PENDING",
+                      "price": "80.00",
+                      "currency": "USD",
+                      "goodWithKids": true,
+                      "createdAt": "2026-01-13T10:40:45.976691Z",
+                      "updatedAt": "2026-01-13T10:40:45.976691Z",
+                      "medicalInfo": {
+                        "vaccinated": true,
+                        "spayedNeutered": true,
+                        "microchipped": false,
+                        "specialNeeds": false,
+                        "healthNotes": "Healthy indoor cat; routine vaccines completed."
+                      }
+                    },
+                    {
+                      "id": "019bb6f1-9cb4-73ed-ab65-9a30b3b7b251",
+                      "name": "StatusCase",
+                      "species": "CAT",
+                      "breed": "Domestic Shorthair",
+                      "ageMonths": 10,
+                      "size": "SMALL",
+                      "status": "ADOPTED",
+                      "price": "80.00",
+                      "currency": "USD",
+                      "goodWithKids": true,
+                      "createdAt": "2026-01-13T10:40:46.26172Z",
+                      "updatedAt": "2026-01-13T10:40:46.26172Z",
+                      "medicalInfo": {
+                        "vaccinated": true,
+                        "spayedNeutered": true,
+                        "microchipped": false,
+                        "specialNeeds": false,
+                        "healthNotes": "Healthy indoor cat; routine vaccines completed."
+                      }
+                    },
+                    {
+                      "id": "019bb6f1-9dd5-76b9-bb69-900b883dfa76",
+                      "name": "StatusCase",
+                      "species": "CAT",
+                      "breed": "Domestic Shorthair",
+                      "ageMonths": 10,
+                      "size": "SMALL",
+                      "status": "NOT_AVAILABLE",
+                      "price": "80.00",
+                      "currency": "USD",
+                      "goodWithKids": true,
+                      "createdAt": "2026-01-13T10:40:46.550303Z",
+                      "updatedAt": "2026-01-13T10:40:46.550303Z",
+                      "medicalInfo": {
+                        "vaccinated": true,
+                        "spayedNeutered": true,
+                        "microchipped": false,
+                        "specialNeeds": false,
+                        "healthNotes": "Healthy indoor cat; routine vaccines completed."
+                      }
+                    },
+                    {
+                      "id": "019bb6f1-ada8-7429-842b-36a2e73cff29",
+                      "name": "Luna",
+                      "species": "CAT",
+                      "breed": "Domestic Shorthair",
+                      "ageMonths": 18,
+                      "size": "SMALL",
+                      "status": "AVAILABLE",
+                      "price": "75.00",
+                      "currency": "USD",
+                      "goodWithKids": true,
+                      "createdAt": "2026-01-13T10:40:50.600988Z",
+                      "updatedAt": "2026-01-13T10:40:50.600988Z",
+                      "medicalInfo": {
+                        "vaccinated": true,
+                        "spayedNeutered": true,
+                        "microchipped": false,
+                        "specialNeeds": false,
+                        "healthNotes": "Routine vaccines complete"
+                      }
+                    },
+                    {
+                      "id": "019bb6f1-b11f-733e-ad93-9e0f7a3c6833",
+                      "name": "BadMedicalExtra",
+                      "species": "DOG",
+                      "ageMonths": 16,
+                      "size": "MEDIUM",
+                      "status": "AVAILABLE",
+                      "price": "120.00",
+                      "currency": "USD",
+                      "goodWithKids": false,
+                      "createdAt": "2026-01-13T10:40:51.488819Z",
+                      "updatedAt": "2026-01-13T10:40:51.488819Z",
+                      "medicalInfo": {
+                        "vaccinated": true,
+                        "spayedNeutered": false,
+                        "microchipped": false,
+                        "specialNeeds": false
+                      }
+                    },
+                    {
+                      "id": "019bb6f1-bd55-70eb-a3c1-9ff728d52036",
+                      "name": "NoCurrency",
+                      "species": "BIRD",
+                      "breed": "Cockatiel",
+                      "ageMonths": 10,
+                      "size": "SMALL",
+                      "status": "AVAILABLE",
+                      "price": "40.00",
+                      "currency": "USD",
+                      "goodWithKids": true,
+                      "createdAt": "2026-01-13T10:40:54.614294Z",
+                      "updatedAt": "2026-01-13T10:40:54.614294Z",
+                      "medicalInfo": {
+                        "vaccinated": true,
+                        "spayedNeutered": false,
+                        "microchipped": false,
+                        "specialNeeds": false,
+                        "healthNotes": "Healthy and active; recent vet check completed."
+                      }
+                    },
+                    {
+                      "id": "019bb6f1-c868-73fc-a72b-2304bf7fcb7f",
+                      "name": "Newborn",
+                      "species": "RABBIT",
+                      "breed": "Holland Lop",
+                      "ageMonths": 0,
+                      "size": "SMALL",
+                      "status": "AVAILABLE",
+                      "price": "45.00",
+                      "currency": "USD",
+                      "goodWithKids": true,
+                      "createdAt": "2026-01-13T10:40:57.449359Z",
+                      "updatedAt": "2026-01-13T10:40:57.449359Z",
+                      "medicalInfo": {
+                        "vaccinated": false,
+                        "spayedNeutered": false,
+                        "microchipped": false,
+                        "specialNeeds": false,
+                        "healthNotes": "Too young for vaccinations; initial health check completed."
+                      }
+                    },
+                    {
+                      "id": "019bb6f1-cba3-72fe-b797-af4d2f14e298",
+                      "name": "NNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNN",
+                      "species": "DOG",
+                      "breed": "Labrador Retriever",
+                      "ageMonths": 2,
+                      "size": "SMALL",
+                      "status": "AVAILABLE",
+                      "price": "65.00",
+                      "currency": "USD",
+                      "goodWithKids": true,
+                      "createdAt": "2026-01-13T10:40:58.276548Z",
+                      "updatedAt": "2026-01-13T10:40:58.276548Z",
+                      "medicalInfo": {
+                        "vaccinated": false,
+                        "spayedNeutered": false,
+                        "microchipped": false,
+                        "specialNeeds": false,
+                        "healthNotes": "Too young for full vaccination series; initial wellness check completed."
+                      }
+                    },
+                    {
+                      "id": "019bb6f1-ccb6-704c-a1dc-d9b3370da04d",
+                      "name": "A",
+                      "species": "CAT",
+                      "breed": "Domestic Shorthair",
+                      "ageMonths": 1,
+                      "size": "SMALL",
+                      "status": "AVAILABLE",
+                      "price": "55.00",
+                      "currency": "USD",
+                      "goodWithKids": true,
+                      "createdAt": "2026-01-13T10:40:58.551616Z",
+                      "updatedAt": "2026-01-13T10:40:58.551616Z",
+                      "medicalInfo": {
+                        "vaccinated": true,
+                        "spayedNeutered": false,
+                        "microchipped": false,
+                        "specialNeeds": false,
+                        "healthNotes": "Initial vet check completed; booster shots scheduled next month."
+                      }
+                    },
+                    {
+                      "id": "019bb6f1-cdcc-756b-a05f-92d456f62441",
+                      "name": "SqlBreed",
+                      "species": "CAT",
+                      "breed": "test'); DROP TABLE pets; --",
+                      "ageMonths": 8,
+                      "size": "SMALL",
+                      "status": "AVAILABLE",
+                      "price": "80.00",
+                      "currency": "USD",
+                      "goodWithKids": true,
+                      "createdAt": "2026-01-13T10:40:58.829087Z",
+                      "updatedAt": "2026-01-13T10:40:58.829087Z",
+                      "medicalInfo": {
+                        "vaccinated": true,
+                        "spayedNeutered": true,
+                        "microchipped": false,
+                        "specialNeeds": false,
+                        "healthNotes": "No known issues"
+                      }
+                    },
+                    {
+                      "id": "019bb6f1-ceeb-736f-8476-208f9d6c12d4",
+                      "name": "' OR '1'='1",
+                      "species": "DOG",
+                      "breed": "Mixed Breed",
+                      "ageMonths": 12,
+                      "size": "MEDIUM",
+                      "status": "AVAILABLE",
+                      "price": "100.00",
+                      "currency": "USD",
+                      "goodWithKids": true,
+                      "createdAt": "2026-01-13T10:40:59.116548Z",
+                      "updatedAt": "2026-01-13T10:40:59.116548Z",
+                      "medicalInfo": {
+                        "vaccinated": true,
+                        "spayedNeutered": true,
+                        "microchipped": false,
+                        "specialNeeds": false,
+                        "healthNotes": "No known issues; record created as part of security validation."
+                      }
+                    },
+                    {
+                      "id": "019bb6f1-d123-775b-ad7f-df8ee2e77148",
+                      "name": "Max",
+                      "species": "DOG",
+                      "breed": "Golden Retriever",
+                      "ageMonths": 24,
+                      "size": "LARGE",
+                      "status": "AVAILABLE",
+                      "price": "250.00",
+                      "currency": "USD",
+                      "goodWithKids": true,
+                      "createdAt": "2026-01-13T10:40:59.684048Z",
+                      "updatedAt": "2026-01-13T10:40:59.684048Z",
+                      "medicalInfo": {
+                        "vaccinated": true,
+                        "spayedNeutered": true,
+                        "microchipped": true,
+                        "specialNeeds": false,
+                        "healthNotes": "Up to date on core vaccinations and recently checked by a veterinarian."
+                      }
+                    }
+                  ],
+                  "pagination": {
+                    "page": 1,
+                    "limit": 20,
+                    "totalItems": 51,
+                    "totalPages": 3
+                  }
+                }
+              }
+            }
+          }
+        },
+        "security": []
+      }
+    },
+    "/user/{id}": {
+      "get": {
+        "summary": "My endpoint",
+        "deprecated": false,
+        "description": "A simple description",
+        "tags": [],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "name": {
+                      "type": "string"
+                    },
+                    "age": {
+                      "type": "integer"
+                    },
+                    "detail": {
+                      "$ref": "#/components/schemas/User%20Details"
+                    }
+                  },
+                  "required": [
+                    "name",
+                    "age",
+                    "detail"
+                  ]
+                },
+                "example": {
+                  "name": "Kristopher Swift",
+                  "age": 71,
+                  "detail": {
+                    "id": 53,
+                    "username": "Mrs. Hope Heidenreich Sr.",
+                    "firstName": "Vinnie",
+                    "lastName": "Jacobson",
+                    "email": "Treva.Bauch@yahoo.com",
+                    "password": "Pi9vDLvPxks_Kxt",
+                    "phone": "(292) 532-1355",
+                    "userStatus": 44627723
+                  }
+                }
+              }
+            },
+            "headers": {}
+          }
+        },
+        "security": [
+          {
+            "OAuth2": []
+          }
+        ]
+      }
+    },
+    "/": {
+      "post": {
+        "summary": "GraphQL Demo",
+        "deprecated": false,
+        "description": "",
+        "tags": [],
+        "parameters": [],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "query": {
+                    "type": "string"
+                  },
+                  "variables": {
+                    "type": "object",
+                    "properties": {},
+                    "nullable": true
+                  }
+                },
+                "required": [
+                  "query"
+                ]
+              },
+              "example": "{\"query\":\"query {\\n    teas {\\n      id,\\n      name\\n    }\\n}\"}"
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {}
+                }
+              }
+            },
+            "headers": {}
+          }
+        },
+        "security": []
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "Electric Vehicle": {
+        "type": "object",
+        "description": "Electric Vehicle",
+        "properties": {
+          "vehicleType": {
+            "description": "The type of vehicle.",
+            "type": "string",
+            "example": "Tesla"
+          },
+          "idealTerrain": {
+            "type": "string",
+            "description": "A road, river, air... Where does this vehicle thrive?",
+            "example": "roads"
+          },
+          "topSpeed": {
+            "description": "The top speed in kilometers per hour rounded to the nearest integer.",
+            "type": "integer",
+            "example": 83
+          },
+          "range": {
+            "description": "The 95th percentile range of a trip in kilometers.",
+            "type": "integer",
+            "example": 100
+          },
+          "powerSource": {
+            "description": "How is the vehicle powered.",
+            "type": "string",
+            "example": "electricity"
+          },
+          "chargeSpeed": {
+            "description": "In range kilometers per hour.",
+            "type": "integer"
+          },
+          "chargeAmps": {
+            "description": "Amps recommended for charging.",
+            "type": "integer"
+          },
+          "chargeVoltage": {
+            "description": "Voltage recommended for charging.",
+            "type": "integer"
+          }
+        }
+      },
+      "Pet": {
+        "type": "object",
+        "required": [
+          "name",
+          "photoUrls"
+        ],
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "category": {
+            "$ref": "#/components/schemas/Category"
+          },
+          "name": {
+            "type": "string",
+            "example": "doggie"
+          },
+          "photoUrls": {
+            "type": "array",
+            "xml": {
+              "wrapped": true
+            },
+            "items": {
+              "type": "string",
+              "xml": {
+                "name": "photoUrl"
+              }
+            }
+          },
+          "tags": {
+            "type": "array",
+            "xml": {
+              "wrapped": true
+            },
+            "items": {
+              "$ref": "#/components/schemas/Tag"
+            }
+          },
+          "status": {
+            "type": "string",
+            "description": "pet status in the store",
+            "enum": [
+              "available",
+              "pending",
+              "sold"
+            ]
+          }
+        },
+        "xml": {
+          "name": "Pet"
+        }
+      },
+      "ApiResponse": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "type": {
+            "type": "string"
+          },
+          "message": {
+            "type": "string"
+          }
+        }
+      },
+      "Category": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "name": {
+            "type": "string"
+          }
+        },
+        "xml": {
+          "name": "Category"
+        }
+      },
+      "Tag": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "name": {
+            "type": "string"
+          }
+        },
+        "xml": {
+          "name": "Tag"
+        }
+      },
+      "Order": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "petId": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "quantity": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "shipDate": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "status": {
+            "type": "string",
+            "description": "Order Status",
+            "enum": [
+              "placed",
+              "approved",
+              "delivered"
+            ]
+          },
+          "complete": {
+            "type": "boolean"
+          }
+        },
+        "xml": {
+          "name": "Order"
+        }
+      },
+      "User Details": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "username": {
+            "type": "string"
+          },
+          "firstName": {
+            "type": "string"
+          },
+          "lastName": {
+            "type": "string"
+          },
+          "email": {
+            "type": "string"
+          },
+          "password": {
+            "type": "string"
+          },
+          "phone": {
+            "type": "string"
+          },
+          "userStatus": {
+            "type": "integer",
+            "format": "int32",
+            "description": "User Status"
+          }
+        },
+        "xml": {
+          "name": "User"
+        }
+      },
+      "UserArray": {
+        "type": "array",
+        "items": {
+          "$ref": "#/components/schemas/User%20Details"
+        }
+      },
+      "Fueled Vehicle": {
+        "type": "object",
+        "title": "Gas-powered Vehicle",
+        "properties": {
+          "vehicleType": {
+            "description": "The type of vehicle.",
+            "type": "string",
+            "example": "car"
+          },
+          "idealTerrain": {
+            "type": "string",
+            "example": "roads"
+          },
+          "topSpeed": {
+            "description": "The top speed in kilometers per hour rounded to the nearest integer.",
+            "type": "integer",
+            "example": 83
+          },
+          "range": {
+            "description": "The 95th percentile range of a trip in kilometers.",
+            "type": "integer",
+            "example": 100
+          },
+          "powerSource": {
+            "description": "Describes how the vehicle is powered.",
+            "type": "string",
+            "example": "gasoline"
+          },
+          "tankCapacity": {
+            "type": "number",
+            "format": "double",
+            "description": "Capacity of the fuel tank in gallons."
+          },
+          "milesPerGallon": {
+            "type": "number",
+            "format": "double",
+            "description": "Miles per gallon on the highway."
+          }
+        }
+      }
+    },
+    "responses": {
+      "Record not found": {
+        "description": "",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "code": {
+                  "type": "integer"
+                },
+                "message": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "code",
+                "message"
+              ]
+            }
+          }
+        }
+      },
+      "Invalid input": {
+        "description": "",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "code": {
+                  "type": "integer"
+                },
+                "message": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "code",
+                "message"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "securitySchemes": {
+      "OAuth2": {
+        "type": "oauth2",
+        "flows": {
+          "authorizationCode": {}
+        }
+      },
+      "Test 1": {
+        "type": "apiKey",
+        "in": "header",
+        "name": "test"
+      },
+      "test 2": {
+        "type": "http",
+        "scheme": "bearer"
+      },
+      "sample": {
+        "type": "http",
+        "scheme": "bearer"
+      },
+      "bearer": {
+        "type": "http",
+        "scheme": "bearer"
+      },
+      "oauth21": {
+        "type": "oauth2",
+        "flows": {
+          "authorizationCode": {
+            "authorizationUrl": "",
+            "tokenUrl": "",
+            "refreshUrl": "",
+            "scopes": {}
+          }
+        }
+      }
+    }
+  },
+  "servers": [],
+  "security": []
+}
