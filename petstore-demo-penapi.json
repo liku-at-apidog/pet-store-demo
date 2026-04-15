@@ -30,7 +30,7 @@
   "paths": {
     "/users/register": {
       "post": {
-        "summary": "Register New Users",
+        "summary": "Register New Users in to the system and record their information",
         "deprecated": false,
         "description": "Registers new users.",
         "tags": [],
