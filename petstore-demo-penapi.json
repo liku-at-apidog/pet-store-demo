@@ -33,7 +33,9 @@
         "summary": "Register New Users",
         "deprecated": false,
         "description": "Registers new users in to the system and record their information.",
-        "tags": [],
+        "tags": [
+          "user"
+        ],
         "parameters": [
           {
             "name": "name",
