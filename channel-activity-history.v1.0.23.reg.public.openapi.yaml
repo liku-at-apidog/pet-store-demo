@@ -69,6 +69,20 @@ paths:
             schema:
               $ref: '#/components/schemas/AddEvent_Request_01'
       responses:
+        '201':
+          description: Se crea el recurso de forma exitosa.
+          headers:
+            Response-MachineName:
+              $ref: '#/components/headers/ResponseMachineName'
+            Response-IP-Address:
+              $ref: '#/components/headers/ResponseIpAddress'
+            Response-Url:
+              $ref: '#/components/headers/ResponseUrl'
+            Response-Time:
+              $ref: '#/components/headers/ResponseTime'
+            Origin-Country:
+              $ref: '#/components/headers/OriginCountry'
+
         '202':
           description: Se recibe la solicitud de forma exitosa.
           headers:
@@ -82,12 +96,18 @@ paths:
               $ref: '#/components/headers/ResponseTime'
             Origin-Country:
               $ref: '#/components/headers/OriginCountry'
-        
+
+        '401':
+          $ref: '#/components/responses/401_Public'
+
         '400':
           $ref: '#/components/responses/4XX_Public'
-          
+
         '500':
           $ref: '#/components/responses/5XX_Public'
+
+        '300':
+          $ref: '#/components/responses/3XX_Public'
 
 components:
   parameters:
@@ -260,6 +280,30 @@ components:
         - EC
   
   responses:
+    3XX_Public:
+      description: Respuesta de redirección. Este formato aplica para los códigos 300 al 308.
+      headers:
+        Response-Time:
+          $ref: '#/components/headers/ResponseTime'
+        Origin-Country:
+          $ref: '#/components/headers/OriginCountry'
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Response_3XX_01'
+
+    401_Public:
+      description: Respuesta fallida por errores de autenticación. Este formato aplica para el código 401.
+      headers:
+        Response-Time:
+          $ref: '#/components/headers/ResponseTime'
+        Origin-Country:
+          $ref: '#/components/headers/OriginCountry'
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error_4XX_01'
+
     4XX_Public:
       description: Respuesta fallida por errores en el request. Este formato aplica para los códigos 400 al 451.
       headers:
@@ -314,6 +358,39 @@ components:
               url: "http://servicio-prueba/api"
       
     
+    Response_3XX_01:
+      type: object
+      description: Respuesta de redirección.
+      required:
+      - Response
+      properties:
+        Response:
+          type: object
+          description: Respuesta de redirección.
+          required:
+            - code
+            - id
+            - message
+          properties:
+            code:
+              maxLength: 3
+              minLength: 3
+              type: string
+              description: Corresponde al HTTP Status Code del 300 al 308 resultante de la ejecución del servicio.
+              example: "300"
+            message:
+              maxLength: 200
+              minLength: 1
+              type: string
+              description: Mensaje en lenguaje de alto nivel donde se expresa una descripción de la redirección presentada.
+              example: Redirección requerida para completar la solicitud.
+            id:
+              maxLength: 50
+              minLength: 1
+              type: string
+              description: Identificador único del evento presentado para darle trazabilidad al soporte de la aplicación.
+              example: c4abb6dc-d0c4-4621-a63e-ee2df4e9f85f
+
     Error_4XX_01:
       type: object
       description: Respuesta fallida por error en el request.
@@ -340,7 +417,7 @@ components:
               $ref: "#/components/schemas/D_Error_Id"
             errors:
               $ref: "#/components/schemas/Error_Errors"
-    
+
     Error_5XX_01:
       required:
       - Error
