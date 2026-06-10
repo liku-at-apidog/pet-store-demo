@@ -1,0 +1,544 @@
+openapi: 3.0.1
+info:
+  title: channel-activity-history
+  description: Provee funcionalidad para registro y recuperación de la actividad de los clientes en los diferentes canales.
+  version: develop
+  contact:
+    name: Centro de Competencia para el Gobierno Corporativo de APIs
+    email: ccapis@grupopromerica.com
+  license:
+    name: Información estrictamente confidencial. Todos los derechos reservados. Propiedad intelectual de **PFC TI SRL** para uso exclusivo de **Grupo Promerica S.A.**
+    url: https://www.pfcti.fi.cr/terminos-y-condiciones
+tags:
+  - name: Operaciones y Soporte
+    description: |
+      Gestión de aspectos operativos y técnicos del ecosistema de APIs: salud de servicios, monitoreo, logging, versionado, SLAs, incidentes.
+      <details>
+        <summary>Más información...</summary>
+        * Alcance: 
+          * Registro de logs (auditoría técnica, trazabilidad).
+          * Health checks (/health, /status).
+          * Monitoreo de performance.
+          * Gestión de versiones de API.
+          * Reporte de incidentes y métricas técnicas.
+        * Excluye: 
+          * Lógica de negocio (pagos, cuentas, etc.).
+          * Reportes regulatorios (van en Cumplimiento & Regulación).
+          * Analítica de negocio (va en Datos & Reportes).pagos monetarios (van en Transacciones y Pagos).
+        * Criterios: Si la operación es técnica y transversal, no afecta productos ni transacciones, clasifica aquí.
+        * Subtags: logs, auditoria-tecnica, monitoreo, health, versionado, sla.
+      </details>
+    x-bian-business-domain: Business Support
+    x-open-banking-domain: No Identificado
+  - name: Log Centralizado
+    description: Agrupa las operaciones de Log Centralizado.
+  - name: Onboarding
+    description: Agrupa las operaciones de Onboarding.
+  - name: Events
+    description: Agrupa las operaciones del recurso events.
+servers:
+  - url: 'https://name.dns.com'
+    description: DNS de ejemplo. Se debe definir según las especificaciones de cada implementación del API.
+security:
+  - oAuth2: []
+paths:
+  /channel-activity-history/api/v1/logs/events/add:
+    post:
+      summary: AddEvent
+      description: Almacena un evento en la bitácora.
+      operationId: AddEvent
+      tags:
+        - Operaciones y Soporte
+        - Log Centralizado
+        - Onboarding
+        - Events
+      security:
+        - oAuth2: []
+      parameters:
+        - $ref: '#/components/parameters/H_AcceptLanguage'
+        - $ref: '#/components/parameters/H_OriginIpAddress'
+        - $ref: '#/components/parameters/H_XSubscriptionId'
+        - $ref: '#/components/parameters/H_TransactionId'
+        - $ref: '#/components/parameters/H_UserCode'
+        - $ref: '#/components/parameters/H_OriginCountry'
+        - $ref: '#/components/parameters/H_OriginMachineName'
+        - $ref: '#/components/parameters/H_PointCoordinates'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AddEvent_Request_01'
+      responses:
+        '202':
+          description: Se recibe la solicitud de forma exitosa.
+          headers:
+            Response-MachineName:
+              $ref: '#/components/headers/ResponseMachineName'
+            Response-IP-Address:
+              $ref: '#/components/headers/ResponseIpAddress'
+            Response-Url:
+              $ref: '#/components/headers/ResponseUrl'
+            Response-Time:
+              $ref: '#/components/headers/ResponseTime'
+            Origin-Country:
+              $ref: '#/components/headers/OriginCountry'
+        
+        '400':
+          $ref: '#/components/responses/4XX_Public'
+          
+        '500':
+          $ref: '#/components/responses/5XX_Public'
+
+components:
+  parameters:
+    H_AcceptLanguage:
+      name: Accept-Language
+      in: header
+      description: Idioma
+      required: true
+      schema:
+        type: string
+        enum:
+        - es
+        - en
+        - es-CR
+        - es-NI
+        - es-GT
+        - es-HN
+        - es-PA
+        - es-DO
+        - es-SV
+        - es-KY
+        - es-EC
+        - en-CR
+        - en-NI
+        - en-GT
+        - en-HN
+        - en-PA
+        - en-DO
+        - en-SV
+        - en-KY
+        - en-EC
+      example: es-NI
+
+    H_OriginIpAddress:
+      name: Origin-IP-Address
+      in: header
+      description: IP que originó el request al servicio.
+      required: true
+      schema:
+        type: string
+        format: "ipv4, ipv6"
+      example: 192.168.1.57
+
+    H_XSubscriptionId:
+      name: X-Subscription-Id
+      in: header
+      description: Identificador del sistema. Conserva prefijo "X-" debido a dependencia con sistemas internos.
+      required: true
+      schema:
+        maxLength: 50
+        type: string
+      example: NI10100010001FA25684685245836
+
+    H_TransactionId:
+      name: Transaction-Id
+      in: header
+      description: Identificador único de la transacción.
+      required: true
+      schema:
+        maxLength: 38
+        minLength: 5
+        type: string
+      example: 26f0e992-41ba-4e5b-b93f-6111bdea8177
+
+    H_UserCode:
+      name: User-Code
+      in: header
+      description: "Código de usuario que utiliza el cliente que realiza el request. O bien, valores que permitan identificar usuario (persona o sistema) de una solicitud."
+      required: true
+      schema:
+        maxLength: 50
+        minLength: 5
+        type: string
+      example: systemuser195
+
+    H_OriginCountry:
+      name: Origin-Country
+      in: header
+      description: Código de país a 2 caracteres según estándar ISO 3166-1 alfa-2.
+      required: true
+      schema:
+        maxLength: 2
+        minLength: 2
+        type: string
+        enum:
+        - CR
+        - NI
+        - GT
+        - HN
+        - PA
+        - DO
+        - SV
+        - KY
+        - EC
+      example: NI
+
+    H_OriginMachineName:
+      name: Origin-MachineName
+      in: header
+      description: Nombre del servidor/maquina en donde se inicia el request.
+      required: false
+      schema:
+        maxLength: 255
+        minLength: 2
+        type: string
+      example: machine_name_01
+
+    H_PointCoordinates:
+      name: Point-Coordinates
+      in: header
+      description: Localización en donde el usuario final realiza el evento. El formato esperado es GPS ISO 6709.
+      required: false
+      schema:
+        maxLength: 23
+        minLength: 20
+        type: string
+      example: "095953.88, -0840701.56"
+
+  headers:
+    ResponseMachineName:
+      description: Nombre del servidor en donde se procesa el request.
+      schema:
+        maxLength: 255
+        minLength: 2
+        type: string
+        example: machine_name_01
+
+    ResponseIpAddress:
+      description: Dirección IP en donde se procesó el request.
+      schema:
+        maxLength: 45
+        minLength: 7
+        type: string
+        format: "ipv4, ipv6"
+        example: 10.130.23.4
+    
+    ResponseUrl:
+      description: Url en donde se procesó el request.
+      schema:
+        maxLength: 2000
+        minLength: 8
+        type: string
+        format: url
+        example: https://www.grupopromerica.com/
+
+    ResponseTime:
+      description: Duración de la ejecución en milisegundos.
+      schema:
+        maxLength: 8
+        minLength: 3
+        type: string
+        example: 120ms
+
+    OriginCountry:
+      description: Código de país a 2 caracteres segun estandar ISO 3166-1 alfa-2.
+      schema:
+        maxLength: 2
+        minLength: 2
+        type: string
+        example: NI
+        enum:
+        - CR
+        - NI
+        - GT
+        - HN
+        - PA
+        - DO
+        - SV
+        - KY
+        - EC
+  
+  responses:
+    4XX_Public:
+      description: Respuesta fallida por errores en el request. Este formato aplica para los códigos 400 al 451.
+      headers:
+        Response-Time:
+          $ref: '#/components/headers/ResponseTime'
+        Origin-Country:
+          $ref: '#/components/headers/OriginCountry'
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error_4XX_01'
+
+    5XX_Public:
+      description: Respuesta fallida por errores en el request. Este formato aplica para los códigos 500 al 511.
+      headers:
+        Response-Time:
+          $ref: '#/components/headers/ResponseTime'
+        Origin-Country:
+          $ref: '#/components/headers/OriginCountry'
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error_5XX_01'
+
+  securitySchemes:
+    oAuth2:
+      description: Autenticación mediante oAuth2 Client Credentials.
+      type: oauth2
+      flows:
+        clientCredentials:
+          tokenUrl: https://login.microsoftonline.com/{tenant}/oauth2/token 
+          scopes:
+            "https://graph.microsoft.com/.default": Scope default.
+
+  schemas:
+    AddEvent_Request_01:
+      $ref: '#/components/schemas/Event'
+
+    AnyValue:
+      type: object
+      description: Datos de cualquier tipo que se requieran enviar o recibir.
+      example: 
+        Error:
+          code: "461"
+          message: Mensaje de prueba para registro en log centralizado.
+          id: "c4abb6dc-d0c4-4621-a63e-ee2df4e9f85f"
+          errors:
+            - 
+              errorCode: "250250"
+              message: Mensaje de prueba para registro en log centralizado.
+              path: /operacion1
+              url: "http://servicio-prueba/api"
+      
+    
+    Error_4XX_01:
+      type: object
+      description: Respuesta fallida por error en el request.
+      required:
+      - Error
+      properties:
+        Error:
+          type: object
+          description: Respuesta fallida por error controlado.
+          required:
+            - code
+            - id
+            - message
+          properties:
+            code:
+              maxLength: 3
+              minLength: 3
+              type: string
+              description: Corresponde al HTTP Status Code del 400 al 451 resultante de la ejecución del servicio.
+              example: "400"
+            message:
+              $ref: "#/components/schemas/D_Error_Message"
+            id:
+              $ref: "#/components/schemas/D_Error_Id"
+            errors:
+              $ref: "#/components/schemas/Error_Errors"
+    
+    Error_5XX_01:
+      required:
+      - Error
+      type: object
+      properties:
+        Error:
+          type: object
+          description: Respuesta fallida por error no controlado en servidor.
+          required:
+          - code
+          - id
+          - message
+          properties:
+            code:
+              maxLength: 3
+              minLength: 3
+              type: string
+              description: Corresponde al HTTP Status Code del 500 al 511 resultante de la ejecución del servicio.
+              example: "500"
+            message:
+              $ref: "#/components/schemas/D_Error_Message"
+            id:
+              $ref: "#/components/schemas/D_Error_Id"
+            errors:
+              $ref: "#/components/schemas/Error_Errors"
+    
+    Error_Errors:
+      type: array
+      description: Lista de errores registrados durante el procesamiento del request.
+      items:
+        required:
+        - errorCode
+        - message
+        type: object
+        properties:
+          errorCode:
+            maxLength: 50
+            minLength: 1
+            type: string
+            description: "Código de error específico devuelto por el sistema, en caso de error no controlado que no muestre dicho código, se omite el llenado de este valor para dicha llave."
+            example: "50685489"
+          message:
+            maxLength: 1000
+            minLength: 1
+            type: string
+            description: "Mensaje de índole técnica relacionada al error presentado, si se tiene un stacktrace debe agregarse como valor para esta llave. No se envía en zona pública."
+            example: Malformed request syntax
+          path:
+            maxLength: 200
+            minLength: 1
+            type: string
+            description: Hace referencia al path del campo en el JSON que contiene el error. No se envía en zona pública.
+            example: request.customer.identityDocument.number
+          url:
+            maxLength: 500
+            minLength: 1
+            type: string
+            description: Hace referencia a documentación del error especifico o bien documentación del API. No se envía en zona pública.
+            example: https://suppport.center.com/errors/50685489
+
+    Container_Name:
+      type: object
+      description: Información del contenedor donde se van a almacenar el evento.
+      required:
+        - name
+      properties:
+        name:
+          type: string
+          description: Nombre del contenedor de datos donde será almacenado el evento. A cada aplicación se le dará el valor que debe enviar en este parámetro. Si se envía un valor incorrecto, el evento podría perderse al no almacenarse en el contenedor correcto.
+          minLength: 3
+          maxLength: 20
+          example: ContainerAbc
+    
+    LogType_Name:
+      type: object
+      description: Información del tipo de log.
+      required:
+        - name
+      properties:
+        name:
+          $ref: '#/components/schemas/D_LogType_Name'
+    
+    OriginProcess_Name:
+      type: object
+      description: Información del proceso en el sistema que origina el evento.
+      required:
+        - name
+      properties:
+        name:
+          $ref: '#/components/schemas/D_OriginProcess_Name'
+    
+    EventLevel_Name:
+      type: object
+      description: Información del nivel del evento.
+      required:
+        - name
+      properties:
+        name:
+          $ref: '#/components/schemas/D_EventLevel_Name'
+    
+    Event:
+      type: object
+      description: Información de un evento.
+      required:
+        - id
+        - subscriptionId
+        - createdDate
+        - container
+        - logType
+        - type
+        - level
+      properties:
+        id:
+          $ref: '#/components/schemas/D_Uuid'
+        subscriptionId:
+          $ref: '#/components/schemas/D_SubscriptionId'
+        createdDate:
+          $ref: '#/components/schemas/D_CreatedDate'
+        container:
+          $ref: '#/components/schemas/Container_Name'
+        logType:
+          $ref: '#/components/schemas/LogType_Name'
+        originProcess:
+          $ref: '#/components/schemas/OriginProcess_Name'
+        level:
+          $ref: '#/components/schemas/EventLevel_Name'
+        message:
+          $ref: '#/components/schemas/D_Event_Message'
+        data:
+          $ref: '#/components/schemas/AnyValue'
+
+    D_Uuid:
+      type: string
+      description: Definición default de campos uuid.
+      minLength: 1
+      maxLength: 50
+      format: uuid
+      example: "c4abb6dc-d0c4-4621-a63e-ee2df4e9f84e"
+    
+    D_SubscriptionId:
+      type: string
+      description: Código compuesto que identifica el sistema.
+      minLength: 13
+      maxLength: 50
+      example: "NI103000600011112222333344445555AAAABBBBCCCC6"
+    
+    D_CreatedDate:
+      type: string
+      description: Fecha de creación del evento o del registro.
+      format: date-time
+      example: "2021-05-17T16:02:28.000Z"
+    
+    D_Event_Message:
+      type: string
+      description: Definición default del mensaje del evento.
+      example: Error al aplicar la transacción.
+    
+    D_LogType_Name:
+      type: string
+      description: Nombre del tipo de log que permite identificar si corresponde a eventos transaccionales o registros de las aplicaciones para trazabilidad y soporte. >
+        * 'EVENT' - Registro de transacciones, seguridad y acciones de usuario. Es usado para análisis de datos.
+        * 'APPLICATION' - Registro de request, response y trazabilidad en los procesos. Es usado para soporte.
+      minLength: 1
+      maxLength: 100
+      example: EVENT
+      enum:
+        - EVENT
+        - APPLICATION
+    
+    D_OriginProcess_Name:
+      type: string
+      description: Nombre del proceso o componente que origina el evento.
+      minLength: 2
+      maxLength: 100
+      example: Transfer
+    
+    D_EventLevel_Name:
+      type: string
+      description: Nombre del nivel del evento.
+      minLength: 1
+      maxLength: 20
+      example: ERROR
+      enum:
+        - INFO
+        - WARNING
+        - ERROR
+        - DEBUG
+
+    D_Error_Message:
+      maxLength: 200
+      minLength: 1
+      type: string
+      description: Mensaje en lenguaje de alto nivel donde se expresa una descripción del error presentado.
+      example: Error general en el proceso de la transacción.
+    
+    D_Error_Id:
+      maxLength: 50
+      minLength: 1
+      type: string
+      description: "Identificador único del evento de error presentado, normalmente relacionado a un registro en bitácora de errores para darle trazabilidad al soporte de la aplicación."
+      example: c4abb6dc-d0c4-4621-a63e-ee2df4e9f85f
