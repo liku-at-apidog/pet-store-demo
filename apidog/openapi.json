@@ -724,6 +724,10 @@
                     "example": ""
                   }
                 }
+              },
+              "example": {
+                "additionalMetadata": "",
+                "file": ""
               }
             }
           }
