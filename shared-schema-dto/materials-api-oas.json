@@ -1,0 +1,76 @@
+{
+  "openapi": "3.0.3",
+  "info": {
+    "title": "MES API - Demo Env - Materials",
+    "version": "1.0.0",
+    "description": "Reproduction spec: Materials module has a schema named ItemDto."
+  },
+  "servers": [
+    {
+      "url": "https://api.example.com/materials"
+    }
+  ],
+  "paths": {
+    "/materials/{id}": {
+      "get": {
+        "operationId": "getMaterialById",
+        "summary": "Get material by ID",
+        "tags": [
+          "MaterialsApi"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Material record",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ItemDto"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "ItemDto": {
+        "type": "object",
+        "description": "Materials module DTO. This intentionally uses the same schema name as the MBR spec.",
+        "required": [
+          "materialId",
+          "materialName"
+        ],
+        "properties": {
+          "materialId": {
+            "type": "string",
+            "example": "MAT-1001"
+          },
+          "materialName": {
+            "type": "string",
+            "example": "Stainless Steel Sheet"
+          },
+          "unitOfMeasure": {
+            "type": "string",
+            "example": "kg"
+          },
+          "materialCategory": {
+            "type": "string",
+            "example": "Raw Material"
+          }
+        }
+      }
+    }
+  }
+}

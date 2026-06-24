@@ -1,0 +1,76 @@
+{
+  "openapi": "3.0.3",
+  "info": {
+    "title": "MES API - Demo Env - MBR",
+    "version": "1.0.0",
+    "description": "Reproduction spec: MBR module has a different schema also named ItemDto."
+  },
+  "servers": [
+    {
+      "url": "https://api.example.com/mbr"
+    }
+  ],
+  "paths": {
+    "/mbr/{id}": {
+      "get": {
+        "operationId": "getMbrById",
+        "summary": "Get MBR by ID",
+        "tags": [
+          "MBRApi"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "MBR record",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ItemDto"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "ItemDto": {
+        "type": "object",
+        "description": "MBR module DTO. This intentionally uses the same schema name as the Materials spec, but has different fields.",
+        "required": [
+          "mbrId",
+          "recipeCode"
+        ],
+        "properties": {
+          "mbrId": {
+            "type": "string",
+            "example": "MBR-2001"
+          },
+          "recipeCode": {
+            "type": "string",
+            "example": "RC-001"
+          },
+          "version": {
+            "type": "integer",
+            "example": 3
+          },
+          "approvedBy": {
+            "type": "string",
+            "example": "qa.lead@example.com"
+          }
+        }
+      }
+    }
+  }
+}
