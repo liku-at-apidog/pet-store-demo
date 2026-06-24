@@ -15,9 +15,7 @@
       "get": {
         "operationId": "getMaterialById",
         "summary": "Get material by ID",
-        "tags": [
-          "MaterialsApi"
-        ],
+        "tags": [],
         "parameters": [
           {
             "name": "id",

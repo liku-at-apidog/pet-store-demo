@@ -15,9 +15,7 @@
       "get": {
         "operationId": "getMbrById",
         "summary": "Get MBR by ID",
-        "tags": [
-          "MBRApi"
-        ],
+        "tags": [],
         "parameters": [
           {
             "name": "id",
