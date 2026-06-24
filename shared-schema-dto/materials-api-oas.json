@@ -68,6 +68,29 @@
             "example": "Raw Material"
           }
         }
+      },
+      "MaterialAuditDto": {
+        "type": "object",
+        "description": "Materials-specific audit metadata.",
+        "required": [
+          "auditId",
+          "inspectedAt"
+        ],
+        "properties": {
+          "auditId": {
+            "type": "string",
+            "example": "AUD-MAT-001"
+          },
+          "inspectedAt": {
+            "type": "string",
+            "format": "date-time",
+            "example": "2026-06-24T09:30:00Z"
+          },
+          "storageLocation": {
+            "type": "string",
+            "example": "Warehouse A"
+          }
+        }
       }
     }
   }

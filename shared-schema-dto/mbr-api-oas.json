@@ -68,6 +68,29 @@
             "example": "qa.lead@example.com"
           }
         }
+      },
+      "BatchExecutionDto": {
+        "type": "object",
+        "description": "MBR-specific batch execution metadata.",
+        "required": [
+          "batchId",
+          "startedAt"
+        ],
+        "properties": {
+          "batchId": {
+            "type": "string",
+            "example": "BATCH-9001"
+          },
+          "startedAt": {
+            "type": "string",
+            "format": "date-time",
+            "example": "2026-06-24T10:00:00Z"
+          },
+          "operatorId": {
+            "type": "string",
+            "example": "OP-123"
+          }
+        }
       }
     }
   }
